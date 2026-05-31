@@ -1,0 +1,968 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Marion Duhirel — Danseuse Contemporaine</title>
+<style>
+  :root {
+    --encre:   #0E0E0E;
+    --papier:  #F2EFE9;
+    --soleil:  #F2CC32;
+    --klein:   #002FA7;
+    --schia:   #FF4D7E;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--encre);
+    color: var(--papier);
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-weight: 300;
+    letter-spacing: 0.02em;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px 48px;
+    transition: background 0.4s, padding 0.4s;
+  }
+
+  nav .logo {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--papier);
+    opacity: 0.7;
+  }
+
+  nav .links { display: flex; gap: 40px; }
+
+  nav a {
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--papier);
+    text-decoration: none;
+    opacity: 0.6;
+    transition: opacity 0.3s;
+  }
+
+  nav a:hover { opacity: 1; }
+
+  /* ── HERO — split layout ── */
+  #hero {
+    height: 67vh;
+    display: grid;
+    grid-template-columns: 55% 45%;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .hero-left {
+    background: var(--encre);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 0 72px 80px;
+    position: relative;
+    z-index: 2;
+  }
+
+  /* subtle dark gradient overlap on photo edge */
+  .hero-left::after {
+    content: '';
+    position: absolute;
+    top: 0; right: -40px; bottom: 0;
+    width: 80px;
+    background: linear-gradient(to right, var(--encre), transparent);
+    z-index: 3;
+    pointer-events: none;
+  }
+
+  .hero-name {
+    font-size: clamp(48px, 6.5vw, 96px);
+    font-weight: 700;
+    line-height: 0.88;
+    letter-spacing: -0.025em;
+    text-transform: uppercase;
+    color: var(--papier);
+  }
+
+  .hero-name span {
+    display: block;
+    color: var(--soleil);
+  }
+
+  .hero-title {
+    margin-top: 22px;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--papier);
+    opacity: 0.55;
+    line-height: 1.9;
+  }
+
+  .hero-subtitle {
+    margin-top: 6px;
+    font-size: 9px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--papier);
+    opacity: 0.38;
+    line-height: 1.6;
+    max-width: 380px;
+  }
+
+  .hero-right {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 15%;
+    display: block;
+    filter: brightness(0.88) saturate(0.95);
+  }
+
+  /* vertical scroll indicator */
+  .hero-scroll {
+    margin-top: 36px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .hero-scroll span {
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    opacity: 0.3;
+  }
+
+  .scroll-line {
+    width: 40px; height: 1px;
+    background: var(--papier);
+    opacity: 0.2;
+    transform-origin: left center;
+    animation: scrollSlide 2.2s ease-in-out infinite;
+  }
+
+  @keyframes scrollSlide {
+    0%, 100% { transform: scaleX(1); opacity: 0.2; }
+    50% { transform: scaleX(0.4); opacity: 0.08; }
+  }
+
+  /* ── STATEMENT ── */
+  #statement {
+    background: var(--encre);
+    padding: 72px 72px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+  }
+
+  #statement::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 72px; right: 72px;
+    height: 1px;
+    background: var(--papier);
+    opacity: 0.07;
+  }
+
+  #statement::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 72px; right: 72px;
+    height: 1px;
+    background: var(--papier);
+    opacity: 0.07;
+  }
+
+  .statement-inner {
+    max-width: 760px;
+    text-align: center;
+  }
+
+  .statement-text {
+    font-size: clamp(18px, 2.6vw, 30px);
+    font-weight: 300;
+    line-height: 1.5;
+    color: var(--papier);
+    font-style: italic;
+    letter-spacing: 0.01em;
+    padding: 32px 0;
+    border-top: 2px solid var(--schia);
+    border-bottom: 2px solid var(--schia);
+  }
+
+  .statement-text em {
+    font-style: normal;
+    color: var(--soleil);
+  }
+
+  /* ── SECTION TITLES ── */
+  .section-label {
+    font-size: 9px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    opacity: 0.38;
+    margin-bottom: 56px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--papier);
+    opacity: 0.15;
+  }
+
+  /* ── MASTERCLASSES ── */
+  #masterclasses {
+    background: var(--papier);
+    color: var(--encre);
+    padding: 100px 72px;
+  }
+
+  #masterclasses .section-label {
+    color: var(--encre);
+    opacity: 0.32;
+  }
+
+  #masterclasses .section-label::after {
+    background: var(--encre);
+    opacity: 0.1;
+  }
+
+  .mc-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+  }
+
+  .mc-card {
+    background: var(--encre);
+    color: var(--papier);
+    padding: 36px 32px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+  }
+
+  .mc-card:hover { transform: translateY(-3px); }
+
+  .mc-card.featured {
+    grid-column: span 2;
+    background: var(--klein);
+  }
+
+  .mc-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px; height: 100%;
+    background: var(--soleil);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .mc-card.featured::before { background: var(--soleil); opacity: 1; }
+  .mc-card:hover::before { opacity: 1; }
+
+  .mc-year {
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--soleil);
+    opacity: 0.9;
+    margin-bottom: 10px;
+  }
+
+  .mc-artist {
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin-bottom: 10px;
+    line-height: 1.2;
+    color: var(--papier);
+  }
+
+  .mc-card.featured .mc-artist {
+    font-size: 26px;
+    color: var(--soleil);
+  }
+
+  .mc-event {
+    font-size: 11px;
+    font-weight: 400;
+    color: var(--papier);
+    opacity: 0.9;
+    line-height: 1.6;
+    margin-bottom: 4px;
+  }
+
+  .mc-venue {
+    font-size: 10px;
+    color: var(--papier);
+    opacity: 0.65;
+    line-height: 1.5;
+  }
+
+  .mc-tag {
+    display: inline-block;
+    margin-top: 18px;
+    font-size: 8px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    padding: 5px 10px;
+    border: 1px solid rgba(242,239,233,0.45);
+    color: var(--papier);
+    opacity: 0.9;
+  }
+
+  .mc-card.featured .mc-tag {
+    border-color: rgba(242,239,233,0.5);
+  }
+
+  /* ── GALLERY ── */
+  #gallery {
+    background: var(--encre);
+    padding: 100px 0;
+  }
+
+  #gallery .section-label {
+    padding: 0 72px;
+    margin-bottom: 48px;
+  }
+
+  .gallery-masonry {
+    columns: 3;
+    column-gap: 3px;
+    padding: 0 3px;
+  }
+
+  .gallery-item {
+    break-inside: avoid;
+    overflow: hidden;
+    position: relative;
+    background: #111;
+    margin-bottom: 3px;
+    display: block;
+  }
+
+  .gallery-item img {
+    width: 100%;
+    height: auto;
+    display: block;
+    filter: brightness(0.82) saturate(0.88);
+    transition: filter 0.5s ease, transform 0.6s ease;
+  }
+
+  .gallery-item:hover img {
+    filter: brightness(1) saturate(1);
+    transform: scale(1.03);
+  }
+
+  .gallery-caption {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    padding: 16px;
+    background: linear-gradient(to top, rgba(14,14,14,0.8), transparent);
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .gallery-item:hover .gallery-caption { opacity: 1; }
+
+  .gallery-num {
+    position: absolute;
+    top: 8px; left: 8px;
+    background: var(--schia);
+    color: white;
+    font-size: 12px;
+    font-weight: 700;
+    width: 24px; height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+  }
+
+  /* ── VIDEO ── */
+  #videos {
+    background: var(--encre);
+    padding: 80px 72px 120px;
+    border-top: 1px solid rgba(242,239,233,0.05);
+  }
+
+  .video-flex {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3px;
+  }
+
+  /* landscape = 16:9 */
+  .v-landscape {
+    flex: 1 1 calc(50% - 2px);
+    min-width: 280px;
+  }
+
+  /* portrait = 9:16 — narrower columns */
+  .v-portrait {
+    flex: 0 0 calc(25% - 2px);
+    min-width: 180px;
+  }
+
+  .video-wrap {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    background: #0a0a0a;
+  }
+
+  .video-wrap.landscape { padding-bottom: 56.25%; }
+  .video-wrap.portrait  { padding-bottom: 177.78%; }
+
+  .video-wrap iframe {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    border: none;
+  }
+
+  .video-label {
+    margin-top: 12px;
+    font-size: 9px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    opacity: 0.45;
+    line-height: 1.7;
+  }
+
+  .video-label strong {
+    display: block;
+    opacity: 1;
+    font-weight: 600;
+    margin-bottom: 2px;
+    letter-spacing: 0.18em;
+  }
+
+  /* ── CONTACT / FOOTER ── */
+  #contact {
+    background: var(--papier);
+    color: var(--encre);
+    padding: 100px 72px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+
+  .contact-statement {
+    font-size: 15px;
+    font-weight: 300;
+    line-height: 1.7;
+    color: var(--encre);
+    max-width: 440px;
+    font-style: italic;
+    opacity: 0.82;
+  }
+
+  .contact-statement strong {
+    font-style: normal;
+    font-weight: 600;
+    color: var(--klein);
+  }
+
+  .contact-sub-footer {
+    margin-top: 20px;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    opacity: 0.35;
+  }
+
+  .contact-links {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+    align-items: flex-start;
+    padding-left: 20px;
+  }
+
+  .contact-link {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    text-decoration: none;
+    color: var(--encre);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transition: color 0.3s;
+  }
+
+  .contact-link:hover { color: var(--klein); }
+
+  .contact-link-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--soleil);
+    flex-shrink: 0;
+  }
+
+  .contact-link:nth-child(2) .contact-link-dot { background: var(--schia); }
+  .contact-link:nth-child(3) .contact-link-dot { background: var(--klein); }
+  .contact-link:nth-child(4) .contact-link-dot { background: var(--encre); }
+
+  /* ── FOOTER BAR ── */
+  .kairos-bar {
+    background: var(--soleil);
+    height: 4px;
+    width: 100%;
+  }
+
+  footer {
+    background: var(--encre);
+    padding: 24px 72px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  footer p {
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    opacity: 0.22;
+  }
+
+  .footer-accent {
+    width: 28px; height: 2px;
+    background: var(--soleil);
+    opacity: 0.6;
+  }
+
+  /* ── FADE IN ── */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── RESPONSIVE MOBILE ── */
+  @media (max-width: 768px) {
+
+    /* Nav */
+    nav {
+      padding: 18px 24px;
+    }
+    nav .links { gap: 20px; }
+    nav a { font-size: 9px; letter-spacing: 0.1em; }
+
+    /* Hero — photo en haut, texte en bas */
+    #hero {
+      height: auto;
+      grid-template-columns: 1fr;
+      grid-template-rows: 75vw auto;
+    }
+
+    .hero-right { grid-row: 1; height: 75vw; }
+
+    .hero-photo { object-position: center 25%; }
+
+    .hero-left {
+      grid-row: 2;
+      padding: 32px 24px 40px;
+      justify-content: flex-start;
+    }
+
+    .hero-left::after { display: none; }
+
+    .hero-name { font-size: clamp(36px, 11vw, 56px); }
+    .hero-subtitle { max-width: 100%; font-size: 8px; }
+    .hero-scroll { margin-top: 24px; }
+
+    /* Statement */
+    #statement { padding: 48px 24px; }
+    #statement::before, #statement::after { left: 24px; right: 24px; }
+
+    /* Masterclasses */
+    #masterclasses { padding: 64px 24px; }
+    .mc-grid { grid-template-columns: 1fr; }
+    .mc-card.featured { grid-column: span 1; }
+    .mc-card.featured .mc-artist { font-size: 20px; }
+
+    /* Gallery */
+    #gallery { padding: 64px 0; }
+    #gallery .section-label { padding: 0 24px; }
+    .gallery-masonry { columns: 2; }
+
+    /* Videos */
+    #videos { padding: 64px 24px 80px; }
+    .v-portrait, .v-landscape {
+      flex: 1 1 100%;
+      min-width: 0;
+    }
+
+    /* Contact */
+    #contact {
+      padding: 64px 24px;
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+    .contact-links { padding-left: 0; }
+
+    /* Footer */
+    footer { padding: 20px 24px; }
+    footer p { font-size: 8px; }
+  }
+
+  /* Tablette */
+  @media (min-width: 769px) and (max-width: 1024px) {
+    nav { padding: 20px 32px; }
+
+    #hero { grid-template-columns: 58% 42%; }
+    .hero-left { padding: 0 40px 60px; }
+
+    #masterclasses { padding: 80px 40px; }
+    .mc-card.featured .mc-artist { font-size: 22px; }
+
+    #videos { padding: 80px 40px 100px; }
+    .v-portrait { flex: 0 0 calc(33% - 2px); }
+    .v-landscape { flex: 1 1 calc(67% - 2px); }
+
+    #contact { padding: 80px 40px; gap: 48px; }
+    footer { padding: 20px 40px; }
+
+    #gallery .section-label { padding: 0 40px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <span class="logo">Marion Duhirel</span>
+  <div class="links">
+    <a href="#masterclasses">Masterclasses</a>
+    <a href="#gallery">Images</a>
+    <a href="#videos">Vidéo</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<!-- HERO — split layout -->
+<section id="hero">
+
+  <div class="hero-left">
+    <h1 class="hero-name">
+      Marion<span>Duhirel</span>
+    </h1>
+    <p class="hero-title">Danseuse Contemporaine</p>
+    <p class="hero-subtitle">EAT danse contemporaine — École des Rencontres Internationales de Danse Contemporaine, Paris</p>
+    <div class="hero-scroll">
+      <div class="scroll-line"></div>
+      <span>Scroll</span>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <img class="hero-photo"
+         src="https://drive.google.com/thumbnail?id=15JFaUbPaweATX1zD50GBQOGyrlVUF9cK&sz=w2000"
+         alt="Marion Duhirel"
+         onerror="this.src='https://lh3.googleusercontent.com/d/15JFaUbPaweATX1zD50GBQOGyrlVUF9cK'">
+  </div>
+
+</section>
+
+<!-- STATEMENT -->
+<section id="statement">
+  <div class="statement-inner fade-in">
+    <p class="statement-text">
+      Danser selon la philosophie du <em>Kairos</em>. Elle désigne en grec le moment opportun, celui où le geste juste rencontre l'instant juste. C'est cela que je veux donner à voir.
+    </p>
+  </div>
+</section>
+
+<!-- MASTERCLASSES -->
+<section id="masterclasses">
+  <p class="section-label">Workshops &amp; Masterclasses</p>
+
+  <div class="mc-grid fade-in">
+
+    <!-- 1 - Nico Monaco / Akram Khan Company -->
+    <div class="mc-card featured">
+      <p class="mc-year">Été 2026</p>
+      <p class="mc-artist">Nico Monaco</p>
+      <p class="mc-event">Summer Intensive 2026</p>
+      <p class="mc-venue">Henny Jürriens Studio, Amsterdam</p>
+      <span class="mc-tag">Akram Khan Company</span>
+    </div>
+
+    <!-- 2 - Pina Bausch -->
+    <div class="mc-card">
+      <p class="mc-year">Déc 2025</p>
+      <p class="mc-artist">Bénédicte Billiet<br>Scott Jennings</p>
+      <p class="mc-event">Share Intensive — Pina Bausch répertoire</p>
+      <p class="mc-venue">Enden Studio, Berlin</p>
+      <span class="mc-tag">Tanztheater Wuppertal · Pina Bausch</span>
+    </div>
+
+    <!-- 3 - Yue Yin -->
+    <div class="mc-card">
+      <p class="mc-year">Été 2026</p>
+      <p class="mc-artist">Yue Yin</p>
+      <p class="mc-event">Intensive Summer Dance 2026 — Foco technique &amp; répertoire</p>
+      <p class="mc-venue">Fac (Fabrique d'art et de culture), Marseille</p>
+      <span class="mc-tag">Yue Yin Dance Company</span>
+    </div>
+
+    <!-- 4 - Mickael Frappat -->
+    <div class="mc-card">
+      <p class="mc-year">Mai 2026</p>
+      <p class="mc-artist">Mickael Frappat</p>
+      <p class="mc-event">Masterclass — Hofesh Shechter répertoire — Theater of Dreams</p>
+      <p class="mc-venue">Théâtre scène nationale, Narbonne</p>
+      <span class="mc-tag">Hofesh Shechter Company</span>
+    </div>
+
+    <!-- 5 - Sonia Al Khadir -->
+    <div class="mc-card">
+      <p class="mc-year">Été 2025</p>
+      <p class="mc-artist">Sonia Al Khadir</p>
+      <p class="mc-event">Summer Intensive 2025</p>
+      <p class="mc-venue">Ménagerie de Verre, Paris</p>
+      <span class="mc-tag">Carolyn Carlson Company</span>
+    </div>
+
+    <!-- 6 - Adrien Spone -->
+    <div class="mc-card">
+      <p class="mc-year">Mars 2024</p>
+      <p class="mc-artist">Adrien Spone</p>
+      <p class="mc-event">Masterclass — Käfig répertoire — Zephyr</p>
+      <p class="mc-venue">Studio Dansez maintenant, Paris</p>
+      <span class="mc-tag">Compagnie Käfig · Mourad Merzouki</span>
+    </div>
+
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery">
+  <p class="section-label">Images</p>
+
+  <div class="gallery-masonry fade-in">
+    <div class="gallery-item">
+      <img src="https://drive.google.com/thumbnail?id=1aajB0OTUFz2k6L_R3g8Kyw1KrVQhWBar&sz=w1200" alt="Marion Duhirel">
+      <span class="gallery-caption">Shooting photo — Studio Ludovic Lyne, Paris</span>
+    </div>
+    <div class="gallery-item">
+      <img src="https://drive.google.com/thumbnail?id=1Sa99EJaCrpJjhzF9PhqBpVOkWCNPVqad&sz=w1200" alt="Marion Duhirel">
+      <span class="gallery-caption">Kontaktof rehearsal — Share Intensive, Berlin</span>
+    </div>
+    <div class="gallery-item">
+      <img src="https://drive.google.com/thumbnail?id=1h3RxjNZhyO3oOmQ9hfK6OVhyI_2U-n1N&sz=w1200" alt="Marion Duhirel">
+      <span class="gallery-caption">Rite of Spring rehearsal — Share Intensive, Berlin</span>
+    </div>
+    <div class="gallery-item">
+      <img src="https://drive.google.com/thumbnail?id=19Bg33LR6VAXkpP7G3UkWtbDdU6IruwHd&sz=w1200" alt="Marion Duhirel">
+      <span class="gallery-caption">Création personnelle « Entre terre et ciel » — commande Simon Ovilla, Paris</span>
+    </div>
+    <div class="gallery-item">
+      <img src="https://drive.google.com/thumbnail?id=1btWnU9rloZDqX7YwlhXkem8ITT5KSyNL&sz=w1200" alt="Marion Duhirel">
+      <span class="gallery-caption">Tenez votre droit — Compagnie Luciernaga, Espace 1789, Paris</span>
+    </div>
+    <div class="gallery-item">
+      <img src="https://drive.google.com/thumbnail?id=1DzS4KZc0np6JoR8qZZLojK_ZBb7Swt58&sz=w1200" alt="Marion Duhirel">
+      <span class="gallery-caption">Tenez votre droit — Compagnie Luciernaga, Paris</span>
+    </div>
+    <div class="gallery-item">
+      <img src="https://drive.google.com/thumbnail?id=1YWcWrTCKQueul54Z3XFsaxp-6TbowhE6&sz=w1200" alt="Marion Duhirel">
+      <span class="gallery-caption">Création personnelle « Clotho, Lachésis &amp; Atropos » — commande scolaire, Le Regard du Cygne, Paris</span>
+    </div>
+    <div class="gallery-item">
+      <img src="https://drive.google.com/thumbnail?id=1rwL1mMyHYHO5NpZCXNmtmtxMLOHYSO_F&sz=w1200" alt="Marion Duhirel">
+      <span class="gallery-caption">Carte Blanche Sobanova — Opendoor Company, Théâtre Douze, Paris</span>
+    </div>
+    <div class="gallery-item">
+      <img src="https://drive.google.com/thumbnail?id=1ErsEm077eGWIwu3zrOc98PDpUO9TMohH&sz=w1200" alt="Marion Duhirel">
+      <span class="gallery-caption">Carte Blanche Sobanova — Opendoor Company, Théâtre Douze, Paris</span>
+    </div>
+  </div>
+</section>
+
+<!-- VIDEOS -->
+<section id="videos">
+  <p class="section-label">Vidéo</p>
+
+  <div class="video-flex fade-in">
+
+    <!-- Pina — portrait 9:16 -->
+    <div class="v-portrait">
+      <div class="video-wrap portrait">
+        <iframe src="https://drive.google.com/file/d/1UyXfQNLegFE0-Re77H2iq-tVbA5_OVoz/preview"
+                allow="autoplay" allowfullscreen></iframe>
+      </div>
+      <p class="video-label"><strong>Pina</strong>Travail de recherche sur le continu et l'aérien — Le 104, Paris<br>Maarja Nuut, Ruum — Kuud Kuudlama</p>
+    </div>
+
+    <!-- Colère — paysage 16:9 -->
+    <div class="v-landscape">
+      <div class="video-wrap landscape">
+        <iframe src="https://drive.google.com/file/d/1DPRmruUwl32XKA_Mdtgxusu2Dc4b6lNq/preview"
+                allow="autoplay" allowfullscreen></iframe>
+      </div>
+      <p class="video-label"><strong>Colère</strong>Travail de recherche sur le saccadé et l'intensité de regard — Studio, Paris<br>Génération Désenchantée — Suzanne</p>
+    </div>
+
+    <!-- Hofesh — portrait 9:16 -->
+    <div class="v-portrait">
+      <div class="video-wrap portrait">
+        <iframe src="https://drive.google.com/file/d/1Vv2SMPQ8LPmPgKViV4jmKfv-OARVc5Vt/preview"
+                allow="autoplay" allowfullscreen></iframe>
+      </div>
+      <p class="video-label"><strong>Hofesh</strong>Travail de recherche sur l'élasticité — Studio, Paris<br>Obséduction — Henry Torgue &amp; Serge Houppin</p>
+    </div>
+
+    <!-- Bambola — paysage 16:9 -->
+    <div class="v-landscape">
+      <div class="video-wrap landscape">
+        <iframe src="https://drive.google.com/file/d/12pHpbBA81SJ0ev__hfEDJmpUdm-UiS6H/preview"
+                allow="autoplay" allowfullscreen></iframe>
+      </div>
+      <p class="video-label"><strong>Bambola</strong>Semaine de création Sobanova avec Adrien Ouaki — Théâtre Douze, Paris<br>Bambola — Patty Pravo</p>
+    </div>
+
+    <!-- 104 — portrait 9:16 -->
+    <div class="v-portrait">
+      <div class="video-wrap portrait">
+        <iframe src="https://drive.google.com/file/d/1gT5hrxpqcr-fs5F4ppr8xexch-gFMi04/preview"
+                allow="autoplay" allowfullscreen></iframe>
+      </div>
+      <p class="video-label"><strong>104</strong>Travail de recherche entre ciel et terre — Le 104, Paris<br>Speels — Nils Frahm</p>
+    </div>
+
+    <!-- Marion — portrait 9:16 -->
+    <div class="v-portrait">
+      <div class="video-wrap portrait">
+        <iframe src="https://drive.google.com/file/d/12C3wnECJKNTwLoyEPSGp_y9l_8LARs_6/preview"
+                allow="autoplay" allowfullscreen></iframe>
+      </div>
+      <p class="video-label"><strong>Marion</strong>Vidéo portrait Grand Écart — Studio Noir, Paris<br>Paspatou — Parra For Cuva</p>
+    </div>
+
+    <!-- Sans titre — paysage 16:9 -->
+    <div class="v-landscape">
+      <div class="video-wrap landscape">
+        <iframe src="https://drive.google.com/file/d/1I2tFMYQWx9hV7ruSUop5j03UG1zTTKC8/preview"
+                allow="autoplay" allowfullscreen></iframe>
+      </div>
+      <p class="video-label"><strong>Sans titre</strong>Extrait de la pièce "Tenez votre droite" — Compagnie Luciernaga<br>Théâtre de l'Étoile du Nord, Paris</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- CONTACT -->
+<div class="kairos-bar"></div>
+<section id="contact">
+
+  <div>
+    <p class="contact-statement">
+      Je danse pour trouver <strong>l'endroit où les contraires se rejoignent</strong>.
+      Entre ancrage et suspension, entre force et douceur, je cherche
+      ce troisième espace où quelque chose de vrai peut émerger —
+      un corps qui touche le sol pour mieux flotter au-dessus.
+    </p>
+  </div>
+
+  <div class="contact-links">
+    <a class="contact-link" href="https://vimeo.com/home" target="_blank" rel="noopener">
+      <span class="contact-link-dot"></span>
+      Vimeo
+    </a>
+    <a class="contact-link" href="https://www.instagram.com/kairos__c/" target="_blank" rel="noopener">
+      <span class="contact-link-dot"></span>
+      @kairos__c
+    </a>
+    <a class="contact-link" href="mailto:mduhirel@gmail.com">
+      <span class="contact-link-dot"></span>
+      mduhirel@gmail.com
+    </a>
+    <a class="contact-link" href="tel:+33667360983">
+      <span class="contact-link-dot"></span>
+      +33 6 67 36 09 83
+    </a>
+  </div>
+
+</section>
+
+<footer>
+  <p>Marion Duhirel — Portfolio artistique 2026</p>
+  <div class="footer-accent"></div>
+  <p>Projet KAIROS</p>
+</footer>
+
+<script>
+  // Fade-in on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        e.target.querySelectorAll('.mc-card, .gallery-item, .v-portrait, .v-landscape').forEach((child, i) => {
+          child.style.transitionDelay = `${i * 0.06}s`;
+          child.classList.add('fade-in', 'visible');
+        });
+      }
+    });
+  }, { threshold: 0.08 });
+
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  // Nav on scroll
+  const nav = document.querySelector('nav');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 60) {
+      nav.style.background = 'rgba(14,14,14,0.94)';
+      nav.style.backdropFilter = 'blur(14px)';
+      nav.style.padding = '14px 48px';
+    } else {
+      nav.style.background = '';
+      nav.style.backdropFilter = '';
+      nav.style.padding = '';
+    }
+  });
+</script>
+
+</body>
+</html>
