@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Marion Duhirel — Danseuse Contemporaine</title>
+<title>Marion Duhirel — Danseuse contemporaine</title>
+<meta name="description" content="Portfolio de Marion Duhirel, danseuse contemporaine diplômée de l’EAT (RIDC, Paris, 2026) : vidéos, scène, masterclasses.">
 <style>
   :root {
     --encre:   #0E0E0E;
@@ -58,6 +59,20 @@
   }
 
   nav a:hover { opacity: 1; }
+
+  .lang-toggle {
+    margin-left: 8px;
+    background: none;
+    border: 1px solid rgba(242,239,233,0.35);
+    color: var(--papier);
+    font: inherit;
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    padding: 4px 8px;
+    cursor: pointer;
+    opacity: 0.75;
+  }
+  .lang-toggle:hover { opacity: 1; border-color: var(--soleil); }
 
   /* ── HERO — split layout ── */
   #hero {
@@ -241,12 +256,16 @@
   #masterclasses {
     background: var(--papier);
     color: var(--encre);
-    padding: 100px 72px;
+    padding: 64px 72px 72px;
   }
+
+  /* vidéo de candidature mise en avant */
+  .v-feature { flex: 1 1 100%; margin-bottom: 40px; }
 
   #masterclasses .section-label {
     color: var(--encre);
     opacity: 0.32;
+    margin-bottom: 28px;
   }
 
   #masterclasses .section-label::after {
@@ -256,25 +275,24 @@
 
   .mc-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     gap: 2px;
   }
 
   .mc-card {
     background: var(--encre);
     color: var(--papier);
-    padding: 36px 32px;
+    padding: 18px 20px 16px;
     position: relative;
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
     transition: transform 0.3s ease;
   }
 
-  .mc-card:hover { transform: translateY(-3px); }
+  .mc-card:hover { transform: translateY(-2px); }
 
-  .mc-card.featured {
-    grid-column: span 2;
-    background: var(--klein);
-  }
+  .mc-card.featured { background: var(--klein); }
 
   .mc-card::before {
     content: '';
@@ -286,7 +304,7 @@
     transition: opacity 0.3s;
   }
 
-  .mc-card.featured::before { background: var(--soleil); opacity: 1; }
+  .mc-card.featured::before { opacity: 1; }
   .mc-card:hover::before { opacity: 1; }
 
   .mc-year {
@@ -294,55 +312,46 @@
     letter-spacing: 0.2em;
     text-transform: uppercase;
     color: var(--soleil);
-    opacity: 0.9;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
   }
 
-  .mc-artist {
-    font-size: 18px;
+  .mc-title {
+    font-size: 14px;
     font-weight: 700;
-    letter-spacing: -0.01em;
-    margin-bottom: 10px;
-    line-height: 1.2;
+    line-height: 1.25;
+    letter-spacing: -0.005em;
     color: var(--papier);
+    margin-bottom: 6px;
   }
 
-  .mc-card.featured .mc-artist {
-    font-size: 26px;
-    color: var(--soleil);
-  }
+  .mc-card.featured .mc-title { color: var(--soleil); }
 
-  .mc-event {
+  .mc-lead {
     font-size: 11px;
-    font-weight: 400;
     color: var(--papier);
-    opacity: 0.9;
-    line-height: 1.6;
-    margin-bottom: 4px;
+    opacity: 0.92;
+    line-height: 1.45;
   }
 
   .mc-venue {
     font-size: 10px;
     color: var(--papier);
     opacity: 0.65;
-    line-height: 1.5;
+    line-height: 1.45;
+    margin-top: 2px;
   }
 
   .mc-tag {
-    display: inline-block;
-    margin-top: 18px;
-    font-size: 8px;
-    letter-spacing: 0.18em;
+    align-self: flex-start;
+    margin-top: auto;
+    font-size: 7.5px;
+    letter-spacing: 0.16em;
     text-transform: uppercase;
-    padding: 5px 10px;
+    padding: 4px 8px;
     border: 1px solid rgba(242,239,233,0.45);
     color: var(--papier);
-    opacity: 0.9;
   }
-
-  .mc-card.featured .mc-tag {
-    border-color: rgba(242,239,233,0.5);
-  }
+  .mc-tag-wrap { margin-top: auto; padding-top: 12px; }
 
   /* ── GALLERY ── */
   #gallery {
@@ -355,23 +364,26 @@
     margin-bottom: 48px;
   }
 
-  .gallery-masonry {
-    columns: 3;
-    column-gap: 3px;
-    padding: 0 3px;
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 72px;
   }
 
   .gallery-item {
-    break-inside: avoid;
     overflow: hidden;
     position: relative;
     background: #111;
-    margin-bottom: 3px;
     display: block;
   }
 
   .gallery-item img {
     width: 100%;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
     height: auto;
     display: block;
     filter: brightness(0.82) saturate(0.88);
@@ -470,6 +482,26 @@
     margin-bottom: 2px;
     letter-spacing: 0.18em;
   }
+
+  /* grille vidéos : 3 formats story / 2 paysage */
+  .v-row {
+    display: grid;
+    gap: 6px;
+    max-width: 1100px;
+    margin: 0 auto 36px;
+  }
+  .v-row-3 { grid-template-columns: repeat(3, 1fr); }
+  .v-row-2 { grid-template-columns: repeat(2, 1fr); }
+  .v-row-1 { grid-template-columns: 1fr; max-width: 740px; }
+  .v-item { margin: 0; }
+  .v-item video {
+    display: block;
+    width: 100%;
+    background: #000;
+    object-fit: cover;
+  }
+  .v-story video { aspect-ratio: 9 / 16; }
+  .v-land video  { aspect-ratio: 16 / 9; }
 
   /* ── CONTACT / FOOTER ── */
   #contact {
@@ -586,8 +618,10 @@
     nav {
       padding: 18px 24px;
     }
-    nav .links { gap: 20px; }
-    nav a { font-size: 9px; letter-spacing: 0.1em; }
+    nav .links { gap: 8px 14px; flex-wrap: wrap; justify-content: flex-end; align-items: center; }
+    nav a { font-size: 9px; letter-spacing: 0.08em; }
+
+    @media (max-width: 520px) { nav .logo { display: none; } nav { justify-content: flex-end; } }
 
     /* Hero — photo en haut, texte en bas */
     #hero {
@@ -617,18 +651,20 @@
     #statement::before, #statement::after { left: 24px; right: 24px; }
 
     /* Masterclasses */
-    #masterclasses { padding: 64px 24px; }
-    .mc-grid { grid-template-columns: 1fr; }
-    .mc-card.featured { grid-column: span 1; }
-    .mc-card.featured .mc-artist { font-size: 20px; }
+    #masterclasses { padding: 48px 24px; }
+    .mc-grid { grid-template-columns: repeat(2, 1fr); }
+    .mc-card { padding: 14px 14px 12px; }
 
     /* Gallery */
     #gallery { padding: 64px 0; }
     #gallery .section-label { padding: 0 24px; }
-    .gallery-masonry { columns: 2; }
+    .gallery-grid { grid-template-columns: repeat(2, 1fr); padding: 0 24px; gap: 4px; }
 
     /* Videos */
     #videos { padding: 64px 24px 80px; }
+    .v-row { margin-bottom: 24px; gap: 4px; }
+    .v-row-3 { grid-template-columns: repeat(2, 1fr); }
+    .v-row-2 { grid-template-columns: 1fr; }
     .v-portrait, .v-landscape {
       flex: 1 1 100%;
       min-width: 0;
@@ -654,8 +690,8 @@
     #hero { grid-template-columns: 58% 42%; }
     .hero-left { padding: 0 40px 60px; }
 
-    #masterclasses { padding: 80px 40px; }
-    .mc-card.featured .mc-artist { font-size: 22px; }
+    #masterclasses { padding: 56px 40px; }
+    .mc-grid { grid-template-columns: repeat(2, 1fr); }
 
     #videos { padding: 80px 40px 100px; }
     .v-portrait { flex: 0 0 calc(33% - 2px); }
@@ -665,6 +701,7 @@
     footer { padding: 20px 40px; }
 
     #gallery .section-label { padding: 0 40px; }
+    .gallery-grid { padding: 0 40px; }
   }
 </style>
 </head>
@@ -675,9 +712,10 @@
   <span class="logo">Marion Duhirel</span>
   <div class="links">
     <a href="#masterclasses">Masterclasses</a>
+    <a href="#videos" data-en="Video">Vidéo</a>
     <a href="#gallery">Images</a>
-    <a href="#videos">Vidéo</a>
     <a href="#contact">Contact</a>
+    <button class="lang-toggle" type="button" aria-label="Switch to English">EN</button>
   </div>
 </nav>
 
@@ -686,10 +724,10 @@
 
   <div class="hero-left">
     <h1 class="hero-name">
-      Marion<span>Duhirel</span>
+      Marion <span>Duhirel</span>
     </h1>
-    <p class="hero-title">Danseuse Contemporaine</p>
-    <p class="hero-subtitle">EAT danse contemporaine — École des Rencontres Internationales de Danse Contemporaine, Paris</p>
+    <p class="hero-title" data-en="Contemporary dancer">Danseuse contemporaine</p>
+    <p class="hero-subtitle" data-en="EAT in contemporary dance — RIDC school (Rencontres Internationales de Danse Contemporaine), Paris, 2026">EAT danse contemporaine — École des Rencontres Internationales de Danse Contemporaine (RIDC), Paris, 2026</p>
     <div class="hero-scroll">
       <div class="scroll-line"></div>
       <span>Scroll</span>
@@ -699,7 +737,8 @@
   <div class="hero-right">
     <img class="hero-photo"
          src="https://drive.google.com/thumbnail?id=15JFaUbPaweATX1zD50GBQOGyrlVUF9cK&sz=w2000"
-         alt="Marion Duhirel"
+         alt="Portrait de Marion Duhirel, danseuse contemporaine"
+         data-alt-en="Portrait of Marion Duhirel, contemporary dancer"
          onerror="this.src='https://lh3.googleusercontent.com/d/15JFaUbPaweATX1zD50GBQOGyrlVUF9cK'">
   </div>
 
@@ -708,7 +747,7 @@
 <!-- STATEMENT -->
 <section id="statement">
   <div class="statement-inner fade-in">
-    <p class="statement-text">
+    <p class="statement-text" data-en="Dancing according to the philosophy of <em>Kairos</em>. In Greek, it names the opportune moment, when the right gesture meets the right instant. That is what I want to show.">
       Danser selon la philosophie du <em>Kairos</em>. Elle désigne en grec le moment opportun, celui où le geste juste rencontre l'instant juste. C'est cela que je veux donner à voir.
     </p>
   </div>
@@ -719,61 +758,124 @@
   <p class="section-label">Workshops &amp; Masterclasses</p>
 
   <div class="mc-grid fade-in">
-
-    <!-- 1 - Nico Monaco / Akram Khan Company -->
     <div class="mc-card featured">
-      <p class="mc-year">Été 2026</p>
-      <p class="mc-artist">Nico Monaco</p>
-      <p class="mc-event">Summer Intensive 2026</p>
-      <p class="mc-venue">Henny Jürriens Studio, Amsterdam</p>
-      <span class="mc-tag">Akram Khan Company</span>
+      <p class="mc-year" data-en="Oct 2026">Oct. 2026</p>
+      <p class="mc-title" data-en="Humanhood Company Workshop">Workshop Compagnie Humanhood</p>
+      <p class="mc-lead">Julia Robert &amp; Rudi Cole</p>
+      <p class="mc-venue" data-en="Orsolina28, Moncalvo (Italy)">Orsolina28, Moncalvo (Italie)</p>
+      <div class="mc-tag-wrap"><span class="mc-tag">Humanhood</span></div>
     </div>
-
-    <!-- 2 - Pina Bausch -->
     <div class="mc-card">
-      <p class="mc-year">Déc 2025</p>
-      <p class="mc-artist">Bénédicte Billiet<br>Scott Jennings</p>
-      <p class="mc-event">Share Intensive — Pina Bausch répertoire</p>
+      <p class="mc-year" data-en="Sept 2026">Sept. 2026</p>
+      <p class="mc-title">Intensive Gaga dancer</p>
+      <p class="mc-lead">Gianni Notarnicola</p>
+      <p class="mc-venue">Micadanses, Paris</p>
+      <div class="mc-tag-wrap"><span class="mc-tag">Gaga</span></div>
+    </div>
+    <div class="mc-card featured">
+      <p class="mc-year" data-en="Summer 2026">Été 2026</p>
+      <p class="mc-title" data-en="Akram Khan Summer Intensive">Akram Khan Summer Intensif</p>
+      <p class="mc-lead">Nico Monaco</p>
+      <p class="mc-venue">Henny Jurriens Studio, Amsterdam</p>
+      <div class="mc-tag-wrap"><span class="mc-tag">Akram Khan Company</span></div>
+    </div>
+    <div class="mc-card">
+      <p class="mc-year" data-en="Summer 2026">Été 2026</p>
+      <p class="mc-title" data-en="Intensive Summer Dance 2026 — Foco technique &amp; repertoire">Intensive Summer Dance 2026 — Foco technique &amp; répertoire</p>
+      <p class="mc-lead">Yue Yin</p>
+      <p class="mc-venue">Fabrique d'art et de culture (Fac), Marseille</p>
+      <div class="mc-tag-wrap"><span class="mc-tag">Yue Yin Dance Company</span></div>
+    </div>
+    <div class="mc-card featured">
+      <p class="mc-year" data-en="June 2026">Juin 2026</p>
+      <p class="mc-title" data-en="Hofesh Shechter Company Workshop">Workshop Compagnie Hofesh Shechter</p>
+      <p class="mc-lead">Hofesh Shechter</p>
+      <p class="mc-venue">Agora, cité internationale de la danse, Montpellier</p>
+      <div class="mc-tag-wrap"><span class="mc-tag">Hofesh Shechter Company</span></div>
+    </div>
+    <div class="mc-card featured">
+      <p class="mc-year" data-en="Dec 2025">Déc. 2025</p>
+      <p class="mc-title">Pina Bausch Share Intensive</p>
+      <p class="mc-lead">Bénédicte Billiet &amp; Scott Jennings</p>
       <p class="mc-venue">Enden Studio, Berlin</p>
-      <span class="mc-tag">Tanztheater Wuppertal · Pina Bausch</span>
+      <div class="mc-tag-wrap"><span class="mc-tag">Tanztheater Wuppertal · Pina Bausch</span></div>
     </div>
-
-    <!-- 3 - Yue Yin -->
     <div class="mc-card">
-      <p class="mc-year">Été 2026</p>
-      <p class="mc-artist">Yue Yin</p>
-      <p class="mc-event">Intensive Summer Dance 2026 — Foco technique &amp; répertoire</p>
-      <p class="mc-venue">Fac (Fabrique d'art et de culture), Marseille</p>
-      <span class="mc-tag">Yue Yin Dance Company</span>
-    </div>
-
-    <!-- 4 - Mickael Frappat -->
-    <div class="mc-card">
-      <p class="mc-year">Mai 2026</p>
-      <p class="mc-artist">Mickael Frappat</p>
-      <p class="mc-event">Masterclass — Hofesh Shechter répertoire — Theater of Dreams</p>
-      <p class="mc-venue">Théâtre scène nationale, Narbonne</p>
-      <span class="mc-tag">Hofesh Shechter Company</span>
-    </div>
-
-    <!-- 5 - Sonia Al Khadir -->
-    <div class="mc-card">
-      <p class="mc-year">Été 2025</p>
-      <p class="mc-artist">Sonia Al Khadir</p>
-      <p class="mc-event">Summer Intensive 2025</p>
+      <p class="mc-year" data-en="Summer 2025">Été 2025</p>
+      <p class="mc-title">Summer Intensive 2025</p>
+      <p class="mc-lead">Sonia Al Khadir</p>
       <p class="mc-venue">Ménagerie de Verre, Paris</p>
-      <span class="mc-tag">Carolyn Carlson Company</span>
+      <div class="mc-tag-wrap"><span class="mc-tag">Carolyn Carlson Company</span></div>
     </div>
-
-    <!-- 6 - Adrien Spone -->
     <div class="mc-card">
-      <p class="mc-year">Mars 2024</p>
-      <p class="mc-artist">Adrien Spone</p>
-      <p class="mc-event">Masterclass — Käfig répertoire — Zephyr</p>
+      <p class="mc-year" data-en="March 2024">Mars 2024</p>
+      <p class="mc-title" data-en="Masterclass — Zéphyr company">Masterclass — Compagnie Zéphyr</p>
+      <p class="mc-lead">Adrien Spone</p>
       <p class="mc-venue">Studio Dansez maintenant, Paris</p>
-      <span class="mc-tag">Compagnie Käfig · Mourad Merzouki</span>
+      <div class="mc-tag-wrap"><span class="mc-tag">Compagnie Käfig · Mourad Merzouki</span></div>
     </div>
+  </div>
+</section>
 
+<!-- VIDEOS -->
+<section id="videos">
+  <p class="section-label" data-en="Video">Vidéo</p>
+
+  <div class="v-rows fade-in">
+    <div class="v-row v-row-3">
+      <figure class="v-item v-story">
+        <video src="videos/01-improvisation-saint-malo-1.mp4" poster="videos/01-improvisation-saint-malo-1.jpg" controls playsinline preload="none" title="Improvisation"></video>
+        <figcaption class="video-label"><strong>Improvisation</strong><span>Studio, Saint-Malo</span></figcaption>
+      </figure>
+      <figure class="v-item v-story">
+        <video src="videos/02-improvisation-saint-malo-2.mp4" poster="videos/02-improvisation-saint-malo-2.jpg" controls playsinline preload="none" title="Improvisation"></video>
+        <figcaption class="video-label"><strong>Improvisation</strong><span>Saint-Malo</span></figcaption>
+      </figure>
+      <figure class="v-item v-story">
+        <video src="videos/03-improvisation-saint-malo-3.mp4" poster="videos/03-improvisation-saint-malo-3.jpg" controls playsinline preload="none" title="Improvisation"></video>
+        <figcaption class="video-label"><strong>Improvisation</strong><span>Studio, Saint-Malo</span></figcaption>
+      </figure>
+    </div>
+    <div class="v-row v-row-2">
+      <figure class="v-item v-land">
+        <video src="videos/04-akram-khan-intensive.mp4" poster="videos/04-akram-khan-intensive.jpg" controls playsinline preload="none" title="Akram Khan Summer Intensive"></video>
+        <figcaption class="video-label"><strong>Akram Khan Summer Intensive</strong><span>Henny Jurriens Studio, Amsterdam — 2026</span></figcaption>
+      </figure>
+      <figure class="v-item v-land">
+        <video src="videos/05-gaga-intensive.mp4" poster="videos/05-gaga-intensive.jpg" controls playsinline preload="none" title="Intensive Gaga"></video>
+        <figcaption class="video-label"><strong data-en="Gaga Intensive">Intensive Gaga</strong><span>Micadanses, Paris — 2026</span></figcaption>
+      </figure>
+    </div>
+    <div class="v-row v-row-3">
+      <figure class="v-item v-story">
+        <video src="videos/06-improvisation-aerien-fluide.mp4" poster="videos/06-improvisation-aerien-fluide.jpg" controls playsinline preload="none" title="Improvisation aérienne et fluide"></video>
+        <figcaption class="video-label"><strong data-en="Aerial and fluid improvisation">Improvisation aérienne et fluide</strong><span>Le 104, Paris — 2025</span></figcaption>
+      </figure>
+      <figure class="v-item v-story">
+        <video src="videos/07-entre-terre-et-ciel.mp4" poster="videos/07-entre-terre-et-ciel.jpg" controls playsinline preload="none" title="Entre terre et ciel"></video>
+        <figcaption class="video-label"><strong>Entre terre et ciel</strong><span data-en="Own creation — Paris, 2025">Création personnelle — Paris, 2025</span></figcaption>
+      </figure>
+      <figure class="v-item v-story">
+        <video src="videos/08-improvisation-hofesh-shechter.mp4" poster="videos/08-improvisation-hofesh-shechter.jpg" controls playsinline preload="none" title="Improvisation"></video>
+        <figcaption class="video-label"><strong>Improvisation</strong><span data-en="Following the Hofesh Shechter masterclass — 2026">Suite à la masterclass Hofesh Shechter — 2026</span></figcaption>
+      </figure>
+    </div>
+    <div class="v-row v-row-2">
+      <figure class="v-item v-land">
+        <video src="videos/09-carte-blanche-sobanova.mp4" poster="videos/09-carte-blanche-sobanova.jpg" controls playsinline preload="none" title="Carte blanche Sobanova"></video>
+        <figcaption class="video-label"><strong>Carte blanche Sobanova</strong><span>Opendoor Company, Théâtre Douze, Paris — 2025</span></figcaption>
+      </figure>
+      <figure class="v-item v-land">
+        <video src="videos/10-tenez-votre-droite.mp4" poster="videos/10-tenez-votre-droite.jpg" controls playsinline preload="none" title="Tenez votre droite"></video>
+        <figcaption class="video-label"><strong>Tenez votre droite</strong><span>Cie Luciérnaga, Espace 1789, Paris — 2025</span></figcaption>
+      </figure>
+    </div>
+    <div class="v-row v-row-1">
+      <figure class="v-item v-land">
+        <video src="videos/11-generation-desenchantee.mp4" poster="videos/11-generation-desenchantee.jpg" controls playsinline preload="none" title="Génération désenchantée"></video>
+        <figcaption class="video-label"><strong>Génération désenchantée</strong><span>Studio, Paris — 2026</span></figcaption>
+      </figure>
+    </div>
   </div>
 </section>
 
@@ -781,115 +883,67 @@
 <section id="gallery">
   <p class="section-label">Images</p>
 
-  <div class="gallery-masonry fade-in">
+  <div class="gallery-grid fade-in">
     <div class="gallery-item">
-      <img src="https://drive.google.com/thumbnail?id=1aajB0OTUFz2k6L_R3g8Kyw1KrVQhWBar&sz=w1200" alt="Marion Duhirel">
-      <span class="gallery-caption">Shooting photo — Studio Ludovic Lyne, Paris</span>
-    </div>
-    <div class="gallery-item">
-      <img src="https://drive.google.com/thumbnail?id=1Sa99EJaCrpJjhzF9PhqBpVOkWCNPVqad&sz=w1200" alt="Marion Duhirel">
-      <span class="gallery-caption">Kontaktof rehearsal — Share Intensive, Berlin</span>
+      <img src="images/01-shooting-ludovic-lyne-1.jpg" width="1080" height="1350" loading="lazy"
+           alt="Marion Duhirel assise sur un cube, portrait en noir et blanc, studio Ludovic Lyne" data-alt-en="Marion Duhirel seated on a cube, black and white studio portrait by Ludovic Lyne">
+      <span class="gallery-caption" data-en="Photo shoot — Studio Ludovic Lyne, Paris">Shooting photo — Studio Ludovic Lyne, Paris</span>
     </div>
     <div class="gallery-item">
-      <img src="https://drive.google.com/thumbnail?id=1h3RxjNZhyO3oOmQ9hfK6OVhyI_2U-n1N&sz=w1200" alt="Marion Duhirel">
-      <span class="gallery-caption">Rite of Spring rehearsal — Share Intensive, Berlin</span>
+      <img src="images/02-shooting-ludovic-lyne-2.jpg" width="1080" height="1350" loading="lazy"
+           alt="Marion Duhirel de profil, le regard levé, lumière chaude du soir" data-alt-en="Marion Duhirel in profile, looking upwards, warm evening light">
+      <span class="gallery-caption" data-en="Photo shoot — Studio Ludovic Lyne, Paris">Shooting photo — Studio Ludovic Lyne, Paris</span>
     </div>
     <div class="gallery-item">
-      <img src="https://drive.google.com/thumbnail?id=19Bg33LR6VAXkpP7G3UkWtbDdU6IruwHd&sz=w1200" alt="Marion Duhirel">
-      <span class="gallery-caption">Création personnelle « Entre terre et ciel » — commande Simon Ovilla, Paris</span>
+      <img src="images/03-shooting-ludovic-lyne-3.jpg" width="1080" height="1350" loading="lazy"
+           alt="Marion Duhirel les yeux fermés, bras enlacés autour d’elle, portrait en noir et blanc" data-alt-en="Marion Duhirel with eyes closed, arms wrapped around herself, black and white portrait">
+      <span class="gallery-caption" data-en="Photo shoot — Studio Ludovic Lyne, Paris">Shooting photo — Studio Ludovic Lyne, Paris</span>
     </div>
     <div class="gallery-item">
-      <img src="https://drive.google.com/thumbnail?id=1btWnU9rloZDqX7YwlhXkem8ITT5KSyNL&sz=w1200" alt="Marion Duhirel">
-      <span class="gallery-caption">Tenez votre droit — Compagnie Luciernaga, Espace 1789, Paris</span>
+      <img src="images/04-sobanova-1.jpg" width="1080" height="1350" loading="lazy"
+           alt="Groupe de danseuses en robes fleuries, bras levés, Carte blanche Sobanova" data-alt-en="Group of dancers in floral dresses, arms raised, Carte blanche Sobanova">
+      <span class="gallery-caption" data-en="Carte blanche Sobanova — Opendoor Company, Théâtre Douze, Paris">Carte blanche Sobanova — Opendoor Company, Théâtre Douze, Paris</span>
     </div>
     <div class="gallery-item">
-      <img src="https://drive.google.com/thumbnail?id=1DzS4KZc0np6JoR8qZZLojK_ZBb7Swt58&sz=w1200" alt="Marion Duhirel">
-      <span class="gallery-caption">Tenez votre droit — Compagnie Luciernaga, Paris</span>
+      <img src="images/05-sobanova-2.jpg" width="1080" height="1350" loading="lazy"
+           alt="Ensemble de danseuses sur scène, bras tendus vers le ciel, Théâtre Douze" data-alt-en="Ensemble of dancers on stage reaching upwards, Théâtre Douze">
+      <span class="gallery-caption" data-en="Carte blanche Sobanova — Opendoor Company, Théâtre Douze, Paris">Carte blanche Sobanova — Opendoor Company, Théâtre Douze, Paris</span>
     </div>
     <div class="gallery-item">
-      <img src="https://drive.google.com/thumbnail?id=1YWcWrTCKQueul54Z3XFsaxp-6TbowhE6&sz=w1200" alt="Marion Duhirel">
-      <span class="gallery-caption">Création personnelle « Clotho, Lachésis &amp; Atropos » — commande scolaire, Le Regard du Cygne, Paris</span>
+      <img src="images/06-sobanova-3.jpg" width="1080" height="1350" loading="lazy"
+           alt="Duo de danseuses mains jointes en contre-jour, Carte blanche Sobanova" data-alt-en="Two dancers joining hands, backlit, Carte blanche Sobanova">
+      <span class="gallery-caption" data-en="Carte blanche Sobanova — Opendoor Company, Théâtre Douze, Paris">Carte blanche Sobanova — Opendoor Company, Théâtre Douze, Paris</span>
     </div>
     <div class="gallery-item">
-      <img src="https://drive.google.com/thumbnail?id=1rwL1mMyHYHO5NpZCXNmtmtxMLOHYSO_F&sz=w1200" alt="Marion Duhirel">
-      <span class="gallery-caption">Carte Blanche Sobanova — Opendoor Company, Théâtre Douze, Paris</span>
+      <img src="images/07-akram-khan-intensive.jpg" width="1080" height="1350" loading="lazy"
+           alt="Groupe de danseurs en mouvement dans le studio Henny Jurriens, intensif Akram Khan, noir et blanc" data-alt-en="Group of dancers moving in the Henny Jurriens studio, Akram Khan intensive, black and white">
+      <span class="gallery-caption" data-en="Akram Khan Intensive — Henny Jurriens Studio, Amsterdam">Intensif Akram Khan — Henny Jurriens Studio, Amsterdam</span>
     </div>
     <div class="gallery-item">
-      <img src="https://drive.google.com/thumbnail?id=1ErsEm077eGWIwu3zrOc98PDpUO9TMohH&sz=w1200" alt="Marion Duhirel">
-      <span class="gallery-caption">Carte Blanche Sobanova — Opendoor Company, Théâtre Douze, Paris</span>
+      <img src="images/08-entre-terre-et-ciel.jpg" width="1080" height="1350" loading="lazy"
+           alt="Marion Duhirel debout en robe noire, mains jointes, dans « Entre terre et ciel »" data-alt-en="Marion Duhirel standing in a black dress, hands joined, in « Entre terre et ciel »">
+      <span class="gallery-caption" data-en="Own creation « Entre terre et ciel » — commissioned by Simon Ovilla, Paris">Création personnelle « Entre terre et ciel » — commande Simon Ovilla, Paris</span>
     </div>
-  </div>
-</section>
-
-<!-- VIDEOS -->
-<section id="videos">
-  <p class="section-label">Vidéo</p>
-
-  <div class="video-flex fade-in">
-
-    <!-- Pina — portrait 9:16 -->
-    <div class="v-portrait">
-      <div class="video-wrap portrait">
-        <iframe src="https://drive.google.com/file/d/1UyXfQNLegFE0-Re77H2iq-tVbA5_OVoz/preview"
-                allow="autoplay" allowfullscreen></iframe>
-      </div>
-      <p class="video-label"><strong>Pina</strong>Travail de recherche sur le continu et l'aérien — Le 104, Paris<br>Maarja Nuut, Ruum — Kuud Kuudlama</p>
+    <div class="gallery-item">
+      <img src="images/09-kontakthof-berlin.jpg" width="1080" height="1350" loading="lazy"
+           alt="Ligne de danseurs en tenue de soirée, répétition de Kontakthof de Pina Bausch, Berlin" data-alt-en="Line of dancers in evening wear rehearsing Pina Bausch’s Kontakthof, Berlin">
+      <span class="gallery-caption" data-en="Kontakthof rehearsal — Share Intensive, Berlin">Répétition de Kontakthof — Share Intensive, Berlin</span>
     </div>
-
-    <!-- Colère — paysage 16:9 -->
-    <div class="v-landscape">
-      <div class="video-wrap landscape">
-        <iframe src="https://drive.google.com/file/d/1DPRmruUwl32XKA_Mdtgxusu2Dc4b6lNq/preview"
-                allow="autoplay" allowfullscreen></iframe>
-      </div>
-      <p class="video-label"><strong>Colère</strong>Travail de recherche sur le saccadé et l'intensité de regard — Studio, Paris<br>Génération Désenchantée — Suzanne</p>
+    <div class="gallery-item">
+      <img src="images/10-tenez-votre-droite-1.jpg" width="1080" height="1350" loading="lazy"
+           alt="Troupe sur scène saluant, Tenez votre droite, Espace 1789" data-alt-en="Company on stage, Tenez votre droite, Espace 1789">
+      <span class="gallery-caption" data-en="Tenez votre droite — Cie Luciérnaga, Espace 1789">Tenez votre droite — Cie Luciérnaga, Espace 1789</span>
     </div>
-
-    <!-- Hofesh — portrait 9:16 -->
-    <div class="v-portrait">
-      <div class="video-wrap portrait">
-        <iframe src="https://drive.google.com/file/d/1Vv2SMPQ8LPmPgKViV4jmKfv-OARVc5Vt/preview"
-                allow="autoplay" allowfullscreen></iframe>
-      </div>
-      <p class="video-label"><strong>Hofesh</strong>Travail de recherche sur l'élasticité — Studio, Paris<br>Obséduction — Henry Torgue &amp; Serge Houppin</p>
+    <div class="gallery-item">
+      <img src="images/11-tenez-votre-droite-2.jpg" width="1080" height="1350" loading="lazy"
+           alt="Danseuses courant en riant dans un studio blanc, répétition de Tenez votre droite" data-alt-en="Dancers running and laughing in a white studio, Tenez votre droite rehearsal">
+      <span class="gallery-caption" data-en="Tenez votre droite — Cie Luciérnaga, Paris">Tenez votre droite — Cie Luciérnaga, Paris</span>
     </div>
-
-    <!-- Bambola — paysage 16:9 -->
-    <div class="v-landscape">
-      <div class="video-wrap landscape">
-        <iframe src="https://drive.google.com/file/d/12pHpbBA81SJ0ev__hfEDJmpUdm-UiS6H/preview"
-                allow="autoplay" allowfullscreen></iframe>
-      </div>
-      <p class="video-label"><strong>Bambola</strong>Semaine de création Sobanova avec Adrien Ouaki — Théâtre Douze, Paris<br>Bambola — Patty Pravo</p>
+    <div class="gallery-item">
+      <img src="images/12-tenez-votre-droite-3.jpg" width="1080" height="1350" loading="lazy"
+           alt="Groupe au sol sous les projecteurs, Tenez votre droite, Espace 1789" data-alt-en="Group on the floor under stage lights, Tenez votre droite, Espace 1789">
+      <span class="gallery-caption" data-en="Tenez votre droite — Cie Luciérnaga, Espace 1789">Tenez votre droite — Cie Luciérnaga, Espace 1789</span>
     </div>
-
-    <!-- 104 — portrait 9:16 -->
-    <div class="v-portrait">
-      <div class="video-wrap portrait">
-        <iframe src="https://drive.google.com/file/d/1gT5hrxpqcr-fs5F4ppr8xexch-gFMi04/preview"
-                allow="autoplay" allowfullscreen></iframe>
-      </div>
-      <p class="video-label"><strong>104</strong>Travail de recherche entre ciel et terre — Le 104, Paris<br>Speels — Nils Frahm</p>
-    </div>
-
-    <!-- Marion — portrait 9:16 -->
-    <div class="v-portrait">
-      <div class="video-wrap portrait">
-        <iframe src="https://drive.google.com/file/d/12C3wnECJKNTwLoyEPSGp_y9l_8LARs_6/preview"
-                allow="autoplay" allowfullscreen></iframe>
-      </div>
-      <p class="video-label"><strong>Marion</strong>Vidéo portrait Grand Écart — Studio Noir, Paris<br>Paspatou — Parra For Cuva</p>
-    </div>
-
-    <!-- Sans titre — paysage 16:9 -->
-    <div class="v-landscape">
-      <div class="video-wrap landscape">
-        <iframe src="https://drive.google.com/file/d/1I2tFMYQWx9hV7ruSUop5j03UG1zTTKC8/preview"
-                allow="autoplay" allowfullscreen></iframe>
-      </div>
-      <p class="video-label"><strong>Sans titre</strong>Extrait de la pièce "Tenez votre droite" — Compagnie Luciernaga<br>Théâtre de l'Étoile du Nord, Paris</p>
-    </div>
-
   </div>
 </section>
 
@@ -898,19 +952,21 @@
 <section id="contact">
 
   <div>
-    <p class="contact-statement">
+    <p class="contact-statement" data-en="I dance to find <strong>the place where opposites meet</strong>. Between grounding and suspension, between strength and softness, I look for that third space where something true can emerge — a body that touches the floor in order to float above it.">
       Je danse pour trouver <strong>l'endroit où les contraires se rejoignent</strong>.
       Entre ancrage et suspension, entre force et douceur, je cherche
       ce troisième espace où quelque chose de vrai peut émerger —
       un corps qui touche le sol pour mieux flotter au-dessus.
     </p>
+    <p class="contact-sub-footer" data-en="Available in Paris">Disponible à Paris</p>
   </div>
 
   <div class="contact-links">
-    <a class="contact-link" href="https://vimeo.com/home" target="_blank" rel="noopener">
+    <!-- Lien Vimeo à rajouter ici quand la chaîne sera prête :
+    <a class="contact-link" href="https://vimeo.com/VOTRE_PROFIL" target="_blank" rel="noopener">
       <span class="contact-link-dot"></span>
       Vimeo
-    </a>
+    </a> -->
     <a class="contact-link" href="https://www.instagram.com/kairos__c/" target="_blank" rel="noopener">
       <span class="contact-link-dot"></span>
       @kairos__c
@@ -928,9 +984,9 @@
 </section>
 
 <footer>
-  <p>Marion Duhirel — Portfolio artistique 2026</p>
+  <p data-en="Marion Duhirel — Artistic portfolio 2026">Marion Duhirel — Portfolio artistique 2026</p>
   <div class="footer-accent"></div>
-  <p>Projet KAIROS</p>
+  <p data-en="KAIROS project">Projet KAIROS</p>
 </footer>
 
 <script>
@@ -939,7 +995,7 @@
     entries.forEach(e => {
       if (e.isIntersecting) {
         e.target.classList.add('visible');
-        e.target.querySelectorAll('.mc-card, .gallery-item, .v-portrait, .v-landscape').forEach((child, i) => {
+        e.target.querySelectorAll('.mc-card, .gallery-item, .v-item').forEach((child, i) => {
           child.style.transitionDelay = `${i * 0.06}s`;
           child.classList.add('fade-in', 'visible');
         });
@@ -962,6 +1018,27 @@
       nav.style.padding = '';
     }
   });
+
+  // FR / EN
+  const toggle = document.querySelector('.lang-toggle');
+  function setLang(lang) {
+    document.documentElement.lang = lang;
+    document.querySelectorAll('[data-en]').forEach(el => {
+      if (el.dataset.fr === undefined) el.dataset.fr = el.innerHTML;
+      el.innerHTML = lang === 'en' ? el.dataset.en : el.dataset.fr;
+    });
+    document.querySelectorAll('[data-alt-en]').forEach(img => {
+      if (img.dataset.altFr === undefined) img.dataset.altFr = img.alt;
+      img.alt = lang === 'en' ? img.dataset.altEn : img.dataset.altFr;
+    });
+    toggle.textContent = lang === 'en' ? 'FR' : 'EN';
+    toggle.setAttribute('aria-label', lang === 'en' ? 'Passer en français' : 'Switch to English');
+    try { localStorage.setItem('lang', lang); } catch (e) {}
+  }
+  toggle.addEventListener('click', () => setLang(document.documentElement.lang === 'en' ? 'fr' : 'en'));
+  let initial = 'fr';
+  try { initial = new URLSearchParams(location.search).get('lang') || localStorage.getItem('lang') || 'fr'; } catch (e) {}
+  if (initial === 'en') setLang('en');
 </script>
 
 </body>
